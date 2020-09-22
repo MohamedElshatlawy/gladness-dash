@@ -5,6 +5,7 @@ import 'package:qutub_dashboard/ui/Home/Order/orderDetails.dart';
 
 import '../../../common.dart';
 import '../../colors.dart';
+import '../../colors.dart';
 
 class OrderListItem extends StatelessWidget {
   int index;
@@ -13,7 +14,7 @@ class OrderListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () { 
+      onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -22,14 +23,13 @@ class OrderListItem extends StatelessWidget {
                     )));
       },
       child: Container(
-         color: MyColor.whiteColor,
+        color: MyColor.whiteColor,
         child: Row(
           textDirection: TextDirection.rtl,
           children: <Widget>[
             Expanded(
                 child: Container(
               padding: EdgeInsets.all(10),
-           
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -37,35 +37,53 @@ class OrderListItem extends StatelessWidget {
                     'طلب رقم # $index',
                     style: TextStyle(color: MyColor.customColor),
                   ),
-                 
                 ],
               ),
             )),
             Container(
               padding: EdgeInsets.all(5),
               width: MediaQuery.of(context).size.width / 4,
-              color: MyColor.customColor,
+              color: (orderModel.status == "sent")
+                  ? MyColor.customColor
+                  : (orderModel.status == "cancel")
+                      ? MyColor.custGrey2
+                      : Color.fromRGBO(43, 188, 177, 1),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "تم الطلب",
+                    (orderModel.status == "sent")
+                        ? "تم الطلب"
+                        : (orderModel.status == "cancel")
+                            ? "تم الإلغاء"
+                            : "تم التأكيد",
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: MyColor.whiteColor),
+                    style: TextStyle(
+                        color: (orderModel.status == "cancel")
+                            ? MyColor.customColor
+                            : MyColor.whiteColor),
                   ),
                   Divider(
-                    color: MyColor.whiteColor,
+                    color: (orderModel.status == "cancel")
+                        ? MyColor.customColor
+                        : MyColor.whiteColor,
                     endIndent: 10,
                     indent: 10,
                   ),
                   Text(
                     '${orderModel.totalPrice}',
-                    style: TextStyle(color: MyColor.whiteColor),
+                    style: TextStyle(
+                        color: (orderModel.status == "cancel")
+                            ? MyColor.customColor
+                            : MyColor.whiteColor),
                   ),
                   Text(
                     'ريال',
-                    style: TextStyle(color: MyColor.whiteColor),
+                    style: TextStyle(
+                        color: (orderModel.status == "cancel")
+                            ? MyColor.customColor
+                            : MyColor.whiteColor),
                   )
                 ],
               ),

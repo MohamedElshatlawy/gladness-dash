@@ -26,11 +26,10 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
 }
 
 Future<dynamic> getFcmToken() async {
-  
   FirebaseMessaging firebaseMessaging = FirebaseMessaging();
   String token = await firebaseMessaging.getToken();
 
-  User user =  FirebaseAuth.instance.currentUser;
+  User user = FirebaseAuth.instance.currentUser;
 
   FirebaseFirestore.instance
       .collection(MyCollections.dashBoardUsers)
@@ -114,16 +113,16 @@ acceptOrderNotification(String userID) async {
       .doc(userID)
       .get()
       .then((value) async {
-    sendToAllClients(value.data()['fcm_token'], 'تم قبول الطلب');
+    sendToAllClients(value.data()['fcm_token'], 'تم تأكيد الحجز');
   });
 }
 
 rejectOrderNotification(String userID) async {
- FirebaseFirestore.instance
+  FirebaseFirestore.instance
       .collection(MyCollections.userCollection)
       .doc(userID)
       .get()
       .then((value) async {
-    await sendToAllClients(value.data()['fcm_token'], 'تم رفض الطلب ');
+    await sendToAllClients(value.data()['fcm_token'], 'تم الغاء الحجز ');
   });
 }

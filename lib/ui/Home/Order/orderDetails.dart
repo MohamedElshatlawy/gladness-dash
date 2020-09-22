@@ -26,7 +26,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     mappingProducts();
   }
 
-   void mappingProducts() async {
+  void mappingProducts() async {
     // widget.orderModel.productsQuantity.forEach((key, v) async {
     //   await getProductDetails(key).then((value) {
     //     if (value is ProductModel) {
@@ -37,29 +37,22 @@ class _OrderDetailsState extends State<OrderDetails> {
     //   });
     // });
   }
- List<Widget> getProductsWidgets({String type}) {
-    
+  List<Widget> getProductsWidgets({String type}) {
     List<Widget> productsWidgets = [];
 
-    
-  //  print("LenPrice:${widget.model.priceList.length}");
+    //  print("LenPrice:${widget.model.priceList.length}");
     for (int i = 0; i < widget.orderModel.selectedItems.length; i++) {
-     
-
-        productsWidgets.add(Text(
-          (type == "name")
-              ? widget.orderModel.selectedItems.keys.elementAt(i)
-              : widget.orderModel.selectedItems.values.elementAt(i),
-          textAlign: TextAlign.right,
-          style: TextStyle(color: Colors.grey, fontSize: 14),
-        ));
-    
-      
+      productsWidgets.add(Text(
+        (type == "name")
+            ? widget.orderModel.selectedItems.keys.elementAt(i)
+            : widget.orderModel.selectedItems.values.elementAt(i),
+        textAlign: TextAlign.right,
+        style: TextStyle(color: Colors.grey, fontSize: 14),
+      ));
     }
     return productsWidgets;
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,8 +162,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                     //         ...getProductsWidgets(type: "quantity")
                     //       ],
                     //     )),
-                   
-                   
+
                     /* Expanded(
                         flex: 1,
                         child: Column(
@@ -211,54 +203,55 @@ class _OrderDetailsState extends State<OrderDetails> {
                 SizedBox(
                   height: 20,
                 ),
-                Divider(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'ملاحظات',
-                  style: TextStyle(fontSize: 16, color: MyColor.customColor),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  (widget.orderModel.notes.isEmpty)
-                      ? 'لايوجد ملاحظات'
-                      : widget.orderModel.notes,
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-                Divider(),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'طرق الدفع',
-                  style: TextStyle(fontSize: 16, color: MyColor.customColor),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Card(
-                  child: ListTile(
-                    leading: Image.asset(
-                      'assets/cash.png',
-                      scale: 8,
-                    ),
-                    title: Text(
-                      'كاش',
-                      style: TextStyle(color: MyColor.customColor),
-                    ),
-                    trailing: Icon(
-                      Icons.check_circle,
-                      color: Colors.green[600],
-                      size: 30,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                // Divider(),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // // Text(
+                // //   'ملاحظات',
+                // //   style: TextStyle(fontSize: 16, color: MyColor.customColor),
+                // // ),
+                // // SizedBox(
+                // //   height: 10,
+                // // ),
+                // // // Text(
+                // // //   (widget.orderModel.notes.isEmpty)
+                // // //       ? 'لايوجد ملاحظات'
+                // // //       : widget.orderModel.notes,
+                // // //   style: TextStyle(fontSize: 16, color: Colors.grey),
+                // // // ),
+                // // // Divider(),
+
+                // // // // SizedBox(
+                // // // //   height: 10,
+                // // // // ),
+                // // // // Text(
+                // // // //   'طرق الدفع',
+                // // // //   style: TextStyle(fontSize: 16, color: MyColor.customColor),
+                // // // // ),
+                // // // // SizedBox(
+                // // // //   height: 10,
+                // // // // ),
+                // // // // Card(
+                // // // //   child: ListTile(
+                // // // //     leading: Image.asset(
+                // // // //       'assets/cash.png',
+                // // // //       scale: 8,
+                // // // //     ),
+                // // // //     title: Text(
+                // // // //       'كاش',
+                // // // //       style: TextStyle(color: MyColor.customColor),
+                // // // //     ),
+                // // // //     trailing: Icon(
+                // // // //       Icons.check_circle,
+                // // // //       color: Colors.green[600],
+                // // // //       size: 30,
+                // // // //     ),
+                // // // //   ),
+                // // // // ),
+                // // // // SizedBox(
+                // // // //   height: 10,
+                // // // // ),
                 Divider(),
                 SizedBox(
                   height: 10,
@@ -281,8 +274,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 //   'يشمل ضريبة القيمة المضافة',
                 //   style: TextStyle(fontSize: 14, color: Colors.grey),
                 // ),
-              
-              
+
                 SizedBox(
                   height: 10,
                 ),
@@ -303,8 +295,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                 // SizedBox(
                 //   height: 10,
                 // ),
-               
-            
+
                 SizedBox(
                   height: 10,
                 ),
@@ -314,19 +305,22 @@ class _OrderDetailsState extends State<OrderDetails> {
                 ),
                 CustomButton(
                   backgroundColor: MyColor.customColor,
-                  btnPressed: (){},
+                  btnPressed: () {},
                   textColor: Colors.white,
                   txt: ' تاريخ الحجز  ${widget.orderModel.selectedDate}',
                 ),
-                  SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 CustomButton(
                   backgroundColor: MyColor.customColor,
-                  btnPressed: (){},
+                  btnPressed: () {},
                   textColor: Colors.white,
                   txt: ' موعد الحجز  ${widget.orderModel.selectedTime}',
-                )
+                ),
+                SizedBox(
+                  height: 30,
+                ),
                 // (widget.orderModel.status==Common.rejectedStatus)?
                 // Column(
                 //   mainAxisAlignment: MainAxisAlignment.start,
@@ -340,11 +334,10 @@ class _OrderDetailsState extends State<OrderDetails> {
                 // // Text('${widget.orderModel.reasonOfReject}',style: TextStyle(
                 // //       color: Colors.grey
                 // //     ),),
-                  
+
                 //   ],
                 // ):Container()
-              
-              
+
                 /*(widget.orderModel.deliveryCost != null &&
                         widget.orderModel.orderStatus == Common.acceptedStatus)
                     ? CustomButton(
@@ -361,6 +354,39 @@ class _OrderDetailsState extends State<OrderDetails> {
                 SizedBox(
                   height: 20,
                 ),*/
+
+                (widget.orderModel.status == "sent")
+                    ? Column(
+                        children: [
+                          CustomButton(
+                            backgroundColor: Color.fromRGBO(43, 188, 177, 1),
+                            btnPressed: () {
+                              confirmReservation(
+                                  orderID: widget.orderModel.firebaseID,
+                                  uID: widget.orderModel.clientID);
+
+                              Navigator.pop(context);
+                            },
+                            textColor: MyColor.whiteColor,
+                            txt: 'تأكيد',
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CustomButton(
+                            backgroundColor: Colors.red[600],
+                            btnPressed: () {
+                              rejectReservation(
+                                  orderID: widget.orderModel.firebaseID,
+                                  uID: widget.orderModel.clientID);
+                              Navigator.pop(context);
+                            },
+                            textColor: MyColor.whiteColor,
+                            txt: 'الغاء',
+                          )
+                        ],
+                      )
+                    : Container()
               ],
             ),
           ),

@@ -12,28 +12,49 @@ Future<dynamic> getProductDetails(String productID) async {
       .doc(productID)
       .get()
       .then((value) {
-    productModel =
-        ProductModel.fromJson(id: value.id, json: value.data());
+    productModel = ProductModel.fromJson(id: value.id, json: value.data());
   });
 
   return productModel;
 }
 
-Future<dynamic> confirmOrder(String orderID, String deliveryCost,String uID) async {
+Future<dynamic> confirmReservation({String orderID, String uID}) async {
+  await FirebaseFirestore.instance
+      .collection("reservations")
+      .doc(orderID)
+      .update({
+    'status': 'confirm',
+  });
+
+  acceptOrderNotification(uID);
+}
+
+Future<dynamic> rejectReservation({String orderID, String uID}) async {
+  await FirebaseFirestore.instance
+      .collection("reservations")
+      .doc(orderID)
+      .update({'status': "cancel"});
+  rejectOrderNotification(uID);
+}
+
+Future<dynamic> confirmOrder(
+    String orderID, String deliveryCost, String uID) async {
+  await FirebaseFirestore.instance
+      .collection(MyCollections.orders)
+      .doc(orderID)
+      .update({
+    'orderStatus': Common.confirmedStatus,
+    'deliveryCost': deliveryCost
+  });
+  acceptOrderNotification(uID);
+}
+
+Future<dynamic> rejectOrder(
+    String orderID, String rejectMsg, String uID) async {
   await FirebaseFirestore.instance
       .collection(MyCollections.orders)
       .doc(orderID)
       .update(
-          {'orderStatus': Common.confirmedStatus, 'deliveryCost': deliveryCost});
-          acceptOrderNotification(uID);
-}
-
-Future<dynamic> rejectOrder(String orderID,String rejectMsg,String uID) async {
-  await FirebaseFirestore.instance
-      .collection(MyCollections.orders)
-      .doc(orderID)
-      .update({'orderStatus': Common.rejectedStatus,
-                    'reasonOfReject':rejectMsg
-      });
-      rejectOrderNotification(uID);
+          {'orderStatus': Common.rejectedStatus, 'reasonOfReject': rejectMsg});
+  rejectOrderNotification(uID);
 }
