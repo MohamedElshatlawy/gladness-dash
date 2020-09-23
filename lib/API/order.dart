@@ -24,6 +24,7 @@ Future<dynamic> confirmReservation({String orderID, String uID}) async {
       .doc(orderID)
       .update({
     'status': 'confirm',
+    'time_stamp': DateTime.now().millisecondsSinceEpoch
   });
 
   acceptOrderNotification(uID);
